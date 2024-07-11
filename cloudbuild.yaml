@@ -20,7 +20,7 @@ steps:
   #       'gke-demo-45',
   #       '--region=us-central1',
   #       '--platform=managed',
-  #       '--image=gcr.io/gke-demo-45/gke-pipeline:$COMMIT_SHA'
+  #       '--image=gcr.io/gke-demo-45/gke-pipeline:$COMMIT_SHA"
   #     ]
 
 
