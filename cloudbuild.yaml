@@ -2,13 +2,13 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'gcr.io/cicd-pipeline-424202/cicd-pipeline:$COMMIT_SHA', 
+           'gcr.io/gke-demo-45/gke-pipeline:$COMMIT_SHA', 
            '.']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 
-           'gcr.io/cicd-pipeline-424202/cicd-pipeline:$COMMIT_SHA']
+           'gcr.io/gke-demo-45/gke-pipeline:$COMMIT_SHA']
 
   # Deploy container image to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -17,10 +17,10 @@ steps:
         'beta',
         'run',
         'deploy',
-        'cicd-pipeline-424202',
+        'gke-demo-45',
         '--region=us-central1',
         '--platform=managed',
-        '--image=gcr.io/cicd-pipeline-424202/cicd-pipeline:$COMMIT_SHA'
+        '--image=gcr.io/gke-demo-45/gke-pipeline:$COMMIT_SHA'
       ]
 
 
