@@ -5,31 +5,31 @@ steps:
   #  Push the container image to container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'push', 'gcr.io/gke-demo-45/container-one:$COMMIT_SHA' ]
-  # Install kubectl
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'components', 'install', 'kubectl' ]
-  # Authenticate kubectl
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'container', 'clusters', 'get-credentials', 'my-gke-cluster', '--region', 'us-central1', '--project', 'gke-demo-45' ]
-  # Authenticate Docker
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'auth', 'configure-docker', 'gcr.io' ]
-  # Substitute environment variables into deployment.yaml
-  - name: 'alpine'
-    entrypoint: 'sh'
-    args:
-      - '-c'
-      - |
-        apk add --no-cache gettext
-        envsubst < deployment.yaml.template > deployment.yaml
-    env:
-      - 'PROJECT_ID=gke-demo-45'
-      - 'COMMIT_SHA=$COMMIT_SHA'
-  # Deploy to GKE
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args: [ 'apply', '-f', 'deployment.yaml' ]
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=my-gke-cluster'
-images:
-  - 'gcr.io/gke-demo-45/container-one:$COMMIT_SHA'
+#   # Install kubectl
+#   - name: 'gcr.io/cloud-builders/gcloud'
+#     args: [ 'components', 'install', 'kubectl' ]
+#   # Authenticate kubectl
+#   - name: 'gcr.io/cloud-builders/gcloud'
+#     args: [ 'container', 'clusters', 'get-credentials', 'my-gke-cluster', '--region', 'us-central1', '--project', 'gke-demo-45' ]
+#   # Authenticate Docker
+#   - name: 'gcr.io/cloud-builders/gcloud'
+#     args: [ 'auth', 'configure-docker', 'gcr.io' ]
+#   # Substitute environment variables into deployment.yaml
+#   - name: 'alpine'
+#     entrypoint: 'sh'
+#     args:
+#       - '-c'
+#       - |
+#         apk add --no-cache gettext
+#         envsubst < deployment.yaml.template > deployment.yaml
+#     env:
+#       - 'PROJECT_ID=gke-demo-45'
+#       - 'COMMIT_SHA=$COMMIT_SHA'
+#   # Deploy to GKE
+#   - name: 'gcr.io/cloud-builders/kubectl'
+#     args: [ 'apply', '-f', 'deployment.yaml' ]
+#     env:
+#       - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+#       - 'CLOUDSDK_CONTAINER_CLUSTER=my-gke-cluster'
+# images:
+#   - 'gcr.io/gke-demo-45/container-one:$COMMIT_SHA'
