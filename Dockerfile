@@ -1,18 +1,10 @@
-FROM python:3.9
+FROM python:3.8
 
-# expose port used by the app
 EXPOSE 8080
-
-# set a directory for the app
 WORKDIR /app
 
-# copy all the files to the container
-COPY requirements.txt /app
+COPY . ./
 
-RUN pip3 install -r requirements.txt 
+RUN pip install -r requirements.txt
 
-COPY . /app
-
-ENTRYPOINT ["python3"]
-
-CMD ["manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["python", "app.py"]
