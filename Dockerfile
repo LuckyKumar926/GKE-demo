@@ -1,7 +1,7 @@
-FROM python
+FROM python:3.9
 
 # expose port used by the app
-EXPOSE 6000
+EXPOSE 8080
 
 # set a directory for the app
 WORKDIR /app
@@ -15,4 +15,4 @@ COPY . /app
 
 ENTRYPOINT ["python3"]
 
-CMD ["manage.py", "runserver", "0.0.0.0:6000"]
+CMD ["manage.py", "runserver", "0.0.0.0:8080"]
